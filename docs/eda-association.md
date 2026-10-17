@@ -1,3 +1,5 @@
+> Contrato transversal vigente: [formatos y consistencia de los cinco módulos](format-consistency-contract.md). Las notas de entrega inicial se conservan como contexto histórico.
+
 # EDA & Association Engine
 
 Motor exploratorio y de descubrimiento inicial de relaciones. Responde a:

@@ -2,7 +2,9 @@ from collections.abc import Callable
 
 from app.adapters.datasource.csv_source import CsvDataSource
 from app.adapters.datasource.dataset_store import InMemoryDatasetStore
+from app.adapters.datasource.json_source import JsonDataSource
 from app.adapters.datasource.router import DataSourceRouter
+from app.adapters.datasource.text_source import TextDataSource
 from app.adapters.datasource.tsv_source import TsvDataSource
 from app.adapters.datasource.upload_storage import TemporaryUploadStorage
 from app.adapters.llm.disabled import DisabledLLMProvider
@@ -62,7 +64,15 @@ def build_llm(settings: Settings) -> LLMProvider:
 
 
 def build_datasource() -> DataSource:
-    return DataSourceRouter({"csv": CsvDataSource(), "tsv": TsvDataSource()})
+    return DataSourceRouter(
+        {
+            "csv": CsvDataSource(),
+            "tsv": TsvDataSource(),
+            "txt": TextDataSource(),
+            "json": JsonDataSource(),
+            "jsonl": JsonDataSource(),
+        }
+    )
 
 
 def build_data_understanding(settings: Settings) -> DataUnderstanding:

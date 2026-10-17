@@ -10,7 +10,7 @@ from app.ports.upload_storage import UploadedContent, UploadStorage
 
 
 class AnalyzeUploadedDataset:
-    """Keep staged CSV/TSV alive for the whole workflow; never expose its local path."""
+    """Keep staged tabular uploads alive for the whole workflow; never expose its local path."""
 
     def __init__(
         self,
@@ -33,8 +33,10 @@ class AnalyzeUploadedDataset:
     ) -> AnalysisReport:
         filename = (file.filename or "").replace("\\", "/").rsplit("/", 1)[-1]
         suffix = "." + filename.rsplit(".", 1)[-1].lower()
-        if suffix not in {".csv", ".tsv"}:
-            raise UploadValidationError("Choose a CSV or TSV dataset")
+        if suffix not in {".csv", ".tsv", ".txt", ".json", ".jsonl"}:
+            raise UploadValidationError(
+                "Choose a CSV, TSV, delimited TXT, tabular JSON or JSONL dataset"
+            )
         dictionary = None
         if dictionary_file is not None:
             content = await self.storage.read(dictionary_file, self.dictionary_limit)
@@ -44,7 +46,7 @@ class AnalyzeUploadedDataset:
                 raise UploadValidationError("Invalid data dictionary JSON") from error
         async with self.storage.stage(file, suffix, self.dataset_limit) as path:
             source = {"kind": suffix[1:], "path": path, "encoding": options.encoding}
-            if suffix == ".csv":
+            if suffix in {".csv", ".txt"}:
                 source["delimiter"] = options.delimiter
             try:
                 report = await self.analysis.workflow.run(

@@ -53,7 +53,7 @@ def test_tsv_and_csv_options(
 @pytest.mark.parametrize(
     "files, expected",
     [
-        ({"file": ("sales.txt", b"id\n1\n")}, "CSV or TSV"),
+        ({"file": ("sales.xlsx", b"id\n1\n")}, "CSV, TSV"),
         ({"file": ("sales.csv", b"a,b\n1\n")}, "Invalid row"),
         ({"file": ("sales.csv", b"")}, "empty"),
         (
