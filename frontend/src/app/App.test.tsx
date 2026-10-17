@@ -33,7 +33,7 @@ describe("intake workflow", () => {
     const dictionary = new File(['{"entries":[]}'], "dictionary.json", { type: "application/json" });
     await user.upload(screen.getByLabelText("Dataset file"), file);
     await user.upload(screen.getByLabelText("Data dictionary file"), dictionary);
-    await user.selectOptions(screen.getByLabelText("CSV separator"), ";");
+    await user.selectOptions(screen.getByLabelText("CSV / TXT separator"), ";");
     await user.selectOptions(screen.getByLabelText("File encoding"), "cp1252");
     await user.click(screen.getByRole("button", { name: "Understand Dataset" }));
     expect(await screen.findByRole("heading", { name: "Dataset Overview" })).toBeInTheDocument();
@@ -66,11 +66,11 @@ describe("intake workflow", () => {
     vi.stubGlobal("fetch", fetchMock);
     renderApp();
     await user.upload(screen.getByLabelText("Dataset file"), new File(["a\n1\n"], "sales.csv"));
-    await user.selectOptions(screen.getByLabelText("CSV separator"), "|");
+    await user.selectOptions(screen.getByLabelText("CSV / TXT separator"), "|");
     await user.click(screen.getByRole("button", { name: "Understand Dataset" }));
     expect(await screen.findByRole("alert")).toHaveTextContent("Invalid row at line 2");
     expect(screen.getByRole("alert")).toHaveTextContent("test-request");
-    expect(screen.getByLabelText("CSV separator")).toHaveValue("|");
+    expect(screen.getByLabelText("CSV / TXT separator")).toHaveValue("|");
     expect(screen.getByRole("button", { name: "Understand Dataset" })).toBeEnabled();
     await user.click(screen.getByRole("button", { name: "Understand Dataset" }));
     expect(await screen.findByRole("heading", { name: "Dataset Overview" })).toBeInTheDocument();

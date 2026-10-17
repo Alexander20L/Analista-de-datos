@@ -1,3 +1,5 @@
+> Contrato transversal vigente: [formatos y consistencia de los cinco módulos](format-consistency-contract.md). Las notas de entrega inicial se conservan como contexto histórico.
+
 # Data Intake & Understanding
 
 > Actualización del integrante 5: ver [guía de integración](integrante5-integracion.md).

@@ -34,7 +34,7 @@ export function ReportPage() {
       if (recover) {
         response = await fetch(`${base}/reports/${encodeURIComponent(runId.trim())}`, { signal: request.signal });
       } else {
-        if (!draft.file) throw new Error("Selecciona un CSV o TSV.");
+        if (!draft.file) throw new Error("Selecciona un CSV, TSV, TXT, JSON o JSONL.");
         const body = new FormData();
         body.append("file", draft.file); body.append("delimiter", draft.delimiter);
         body.append("encoding", draft.encoding);
@@ -56,7 +56,7 @@ export function ReportPage() {
       <h1>Insights y evidencia</h1><p>Consulta los hallazgos, sus limitaciones y el estado de cada etapa.</p></div>
     <Card className="quality-card">
       <h2>Ejecutar un análisis</h2>
-      <label>Dataset CSV o TSV <input aria-label="Dataset del reporte" type="file" accept=".csv,.tsv" disabled={loading}
+      <label>Dataset CSV, TSV, TXT, JSON o JSONL <input aria-label="Dataset del reporte" type="file" accept=".csv,.tsv,.txt,.json,.jsonl" disabled={loading}
         onChange={(event) => updateDraft({ file: event.target.files?.[0] || null })} /></label>
       {draft.file && <p>Archivo seleccionado: {draft.file.name}</p>}
       <label>Pregunta opcional <input aria-label="Pregunta del análisis" value={question} disabled={loading}

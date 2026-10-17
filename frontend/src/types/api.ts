@@ -177,7 +177,7 @@ export interface components {
         /** AnalysisInput */
         AnalysisInput: {
             /** Source */
-            source: components["schemas"]["CsvSourceSpec"] | components["schemas"]["TsvSourceSpec"] | components["schemas"]["TextSourceSpec"] | components["schemas"]["SqlSourceSpec"];
+            source: components["schemas"]["CsvSourceSpec"] | components["schemas"]["TsvSourceSpec"] | components["schemas"]["JsonSourceSpec"] | components["schemas"]["TextSourceSpec"] | components["schemas"]["SqlSourceSpec"];
             schema?: components["schemas"]["DatasetSchema"] | null;
             data_dictionary?: components["schemas"]["DataDictionary"] | null;
             /** User Question */
@@ -537,6 +537,24 @@ export interface components {
             warnings?: string[];
             /** Profiling Time */
             profiling_time: number;
+        };
+        /** JsonSourceSpec */
+        JsonSourceSpec: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            kind: "json" | "jsonl";
+            /**
+             * Path
+             * Format: path
+             */
+            path: string;
+            /**
+             * Encoding
+             * @default utf-8
+             */
+            encoding: string;
         };
         JsonValue: unknown;
         /** PerformanceOverrides */

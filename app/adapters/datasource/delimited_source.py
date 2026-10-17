@@ -79,6 +79,11 @@ def read_delimited(path: Path, delimiter: str, encoding: str) -> LoadedDataset:
         raise DataSourceError(f"Source contains no data rows: {path}")
     if not any(value is not None for column in columns for value in column):
         raise DataSourceError("Source contains only missing values")
+    return build_loaded_dataset(header, columns)
+
+
+def build_loaded_dataset(header: list[str], columns: list[list[str | None]]) -> LoadedDataset:
+    """Use one lossless type inference policy for every tabular format."""
     frame = pd.DataFrame(
         {name: _typed_column(values) for name, values in zip(header, columns, strict=True)}
     )

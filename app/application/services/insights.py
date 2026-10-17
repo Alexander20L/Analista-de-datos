@@ -219,7 +219,7 @@ def generate_insights(
         for result in relevant:
             limitations.extend(result.warnings)
         if dictionary is not None:
-            for entry in dictionary.entries:
+            for entry in sorted(dictionary.entries, key=lambda item: item.column_name):
                 if entry.column_name in assessment.variables and entry.source == "inferred":
                     limitations.append(f"El significado de {entry.column_name} es inferido.")
         limitations.append("Los resultados describen asociaciones y no prueban causalidad.")

@@ -75,7 +75,8 @@ test("EDA and a complete report coexist with recovery and downloads", async ({ p
 });
 
 
-test("default dated payments produce critical evidence and traceable insights", async ({ page }) => {
+for (const format of ["csv", "json"]) {
+test(`default dated payments (${format}) produce critical evidence and traceable insights`, async ({ page }) => {
   test.setTimeout(90_000);
   const rows = ["Nº contribuyente,Fecha de pago,Distrito del inmueble,Impuesto pagado (S/),Intereses pagados (S/),Total pagado (S/)"];
   for (let i = 0; i < 60; i++) {
@@ -85,7 +86,10 @@ test("default dated payments produce critical evidence and traceable insights", 
   }
   await page.goto("/");
   await page.getByLabel("Dataset file", { exact: true }).setInputFiles({
-    name: "dated-payments.csv", mimeType: "text/csv", buffer: Buffer.from(rows.join("\n") + "\n"),
+    name: `dated-payments.${format}`, mimeType: format === "csv" ? "text/csv" : "application/json",
+    buffer: Buffer.from(format === "csv" ? rows.join("\n") + "\n" : JSON.stringify(
+      rows.slice(1).map((row) => Object.fromEntries(rows[0].split(",").map((key, i) => [key, row.split(",")[i]]))),
+    )),
   });
   await page.getByRole("button", { name: "Understand Dataset", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Dataset Overview" })).toBeVisible();
@@ -112,3 +116,5 @@ test("default dated payments produce critical evidence and traceable insights", 
   await page.setViewportSize({ width: 390, height: 844 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
+
+}

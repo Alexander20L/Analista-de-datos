@@ -29,6 +29,12 @@ class TsvSourceSpec(DomainModel):
     encoding: str = "utf-8"
 
 
+class JsonSourceSpec(DomainModel):
+    kind: Literal["json", "jsonl"] = "json"
+    path: Path
+    encoding: str = "utf-8"
+
+
 class TextSourceSpec(DomainModel):
     kind: Literal["txt"] = "txt"
     path: Path
@@ -43,7 +49,8 @@ class SqlSourceSpec(DomainModel):
 
 
 SourceSpec = Annotated[
-    CsvSourceSpec | TsvSourceSpec | TextSourceSpec | SqlSourceSpec, Field(discriminator="kind")
+    CsvSourceSpec | TsvSourceSpec | JsonSourceSpec | TextSourceSpec | SqlSourceSpec,
+    Field(discriminator="kind"),
 ]
 
 

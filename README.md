@@ -4,7 +4,7 @@ Base inicial en Python 3.12+ para un sistema multiagente de análisis de datos.
 El objetivo es comprender datasets, planificar análisis, ejecutar herramientas
 determinísticas, criticar evidencias y producir insights y reportes trazables.
 
-**Estado: intake CSV/TSV, EDA/Associations, Planner/Analysis deterministas, Critic,
+**Estado: intake CSV/TSV/TXT/JSON/JSONL, EDA/Associations, Planner/Analysis deterministas, Critic,
 insights, persistencia, evaluación y reportes integrados.**
 
 Validación de la combinación main/develop y limitaciones conocidas:
@@ -38,6 +38,8 @@ Abre **http://localhost:5173**. Vite reenvía `/api` a FastAPI en el puerto 8000
 El backend procesa los archivos en su entorno local Python; los archivos subidos
 son temporales y se eliminan después del intake. El navegador no necesita conocer
 rutas locales del servidor.
+
+Consistencia de los cinco módulos y formatos tabulares admitidos: [docs/format-consistency-contract.md](docs/format-consistency-contract.md).
 
 Guía de interfaz, contratos y tests: [docs/frontend.md](docs/frontend.md).
 

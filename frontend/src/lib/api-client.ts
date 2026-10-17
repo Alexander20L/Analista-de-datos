@@ -24,7 +24,7 @@ function errorMessage(payload: unknown): string {
 }
 
 export async function submitIntake(draft: IntakeDraft, signal?: AbortSignal): Promise<IntakeResponse> {
-  if (!draft.file) throw new ApiError("Select a CSV or TSV dataset first.");
+  if (!draft.file) throw new ApiError("Select a CSV, TSV, TXT, JSON or JSONL dataset first.");
   const body = new FormData();
   body.append("file", draft.file);
   body.append("delimiter", draft.delimiter);

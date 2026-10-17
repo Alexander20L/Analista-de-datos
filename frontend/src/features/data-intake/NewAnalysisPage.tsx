@@ -25,8 +25,8 @@ export function NewAnalysisPage() {
       <div className="upload-caption"><span><Database size={13} />Connect to SQL <Badge>Coming Soon</Badge></span>
         <span>Your dataset is processed locally by Python.</span></div>
       <div className="reading-options">
-        <div className="field"><label htmlFor="delimiter">CSV separator</label>
-          <select id="delimiter" value={draft.delimiter} disabled={loading || draft.file?.name.toLowerCase().endsWith(".tsv")}
+        <div className="field"><label htmlFor="delimiter">CSV / TXT separator</label>
+          <select id="delimiter" value={draft.delimiter} disabled={loading || /\.(tsv|json|jsonl)$/i.test(draft.file?.name || "")}
             onChange={(event) => updateDraft({ delimiter: event.target.value })}>
             <option value=",">Comma (,)</option><option value=";">Semicolon (;)</option>
             <option value={"\t"}>Tab</option><option value="|">Pipe (|)</option>
