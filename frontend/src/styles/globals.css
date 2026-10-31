@@ -302,6 +302,30 @@ tbody tr:hover { background: #fcfcff; }
 .patterns-chart { max-width: 960px; overflow-x: auto; }
 .patterns-chart .chart-svg { min-width: 600px; }
 .patterns-card .card-heading { gap: 20px; }
+.kmeans-section { margin-top: 32px; }
+.kmeans-card { margin-top: 0; }
+.kmeans-variables { border: 0; margin: 0 0 16px; padding: 0; }
+.kmeans-variables legend { color: #566176; font-size: 12px; font-weight: 500; margin-bottom: 8px; }
+.kmeans-variable-grid { display: flex; flex-wrap: wrap; gap: 8px 14px; }
+.kmeans-variable-grid label { display: inline-flex; align-items: center; gap: 6px; color: #38445a; font-size: 12px; overflow-wrap: anywhere; }
+.kmeans-variable-grid input { accent-color: var(--series-1); }
+.kmeans-controls { align-items: end; margin-bottom: 12px; }
+.kmeans-idle, .field-error { color: var(--muted); font-size: 11px; margin: 12px 0 0; }
+.field-error { color: #8d4d35; }
+.kmeans-results { margin-top: 22px; }
+.kmeans-strip { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.kmeans-limitations { margin: 0 0 20px; }
+.kmeans-limitations h3 { display: flex; gap: 8px; align-items: center; color: #986e30; font-size: 12px; margin-bottom: 8px; }
+.kmeans-limitations p, .kmeans-limitations ul { font-size: 11px; line-height: 1.6; }
+.kmeans-limitations ul { margin: 8px 0 0; padding-left: 18px; }
+.kmeans-chart { max-width: 760px; overflow-x: auto; }
+.kmeans-chart .chart-svg { min-width: 600px; }
+.kmeans-dot { fill-opacity: .55; }
+.kmeans-dot-active { stroke: #fff; stroke-width: 2; pointer-events: none; }
+.kmeans-legend { display: flex; flex-wrap: wrap; gap: 8px 14px; list-style: none; margin: 10px 0 0; padding: 0; color: var(--muted); font-size: 10px; }
+.kmeans-legend li { display: inline-flex; align-items: center; gap: 5px; }
+.kmeans-legend span { width: 9px; height: 9px; border-radius: 50%; }
+.kmeans-table { margin-top: 18px; }
 .contingency { min-width: 0; }
 .contingency.stale { opacity: .55; }
 .contingency-toolbar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
@@ -333,6 +357,7 @@ tbody tr:hover { background: #fcfcff; }
 @media (max-width: 1100px) { .detail-layout, .explorer-charts { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 700px) {
   .associations-metrics, .stat-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kmeans-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ranking-card, .heatmap-card, .explorer-card, .patterns-card { padding: 16px; }
   .detail-heading, .explorer-card .card-heading, .patterns-card .card-heading { flex-direction: column; align-items: flex-start; }
 }
