@@ -50,6 +50,7 @@ from app.modules.exploration.adapters.analytics.association.tools import (
     SpearmanTool,
 )
 from app.modules.exploration.adapters.analytics.base import DatasetTool
+from app.modules.exploration.adapters.analytics.clustering.kmeans import KMeansClusteringTool
 from app.modules.exploration.adapters.analytics.profiling.tools import (
     CardinalityTool,
     DescriptiveStatisticsTool,
@@ -102,6 +103,7 @@ EDA_TOOLS: tuple[type[DatasetTool], ...] = (
     CardinalityTool,
     OutliersTool,
     GroupedSummaryTool,
+    KMeansClusteringTool,
     PearsonTool,
     SpearmanTool,
     ChiSquareTool,

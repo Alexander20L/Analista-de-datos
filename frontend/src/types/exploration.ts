@@ -160,6 +160,37 @@ export interface GroupedSummary {
   overall: NumericSummary;
 }
 
+export interface KMeansCluster {
+  cluster: number;
+  count: number;
+  centroid: Record<string, number>;
+}
+
+export interface KMeansPoint {
+  x: number;
+  y: number;
+  cluster: number;
+}
+
+/** kmeans_clustering: bounded statistical segmentation, never a verified category. */
+export interface KMeansResult {
+  kind: "kmeans";
+  variables: string[];
+  n_clusters: number;
+  clusters: KMeansCluster[];
+  inertia: number;
+  silhouette: number | null;
+  silhouette_sample_size: number;
+  observations_used: number;
+  observations_excluded: number;
+  total_observations: number;
+  projection: { x: string; y: string; uses_all_selected_variables: boolean };
+  points: KMeansPoint[];
+  total_points: number;
+  sampled: boolean;
+  interpretation: string;
+}
+
 export interface OutlierSummary {
   count?: number;
   skipped?: string;
