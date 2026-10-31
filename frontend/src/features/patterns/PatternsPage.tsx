@@ -10,6 +10,7 @@ import { ToolNotice } from "../associations/ToolNotice";
 import { useTool } from "../associations/useTool";
 import { useIntake } from "../data-intake/IntakeProvider";
 import { GroupRangeChart } from "./GroupRangeChart";
+import { KMeansExplorer } from "./KMeansExplorer";
 import { limitations, readGroupedSummary, type PatternGroup } from "./patterns-contract";
 
 const GROUP_LIMITS = [5, 10, 20];
@@ -34,6 +35,7 @@ export function PatternsPage() {
       ? <GroupExplorer key={datasetId} datasetId={datasetId} numeric={numeric} categorical={categorical} />
       : <div className="info-note"><Info size={16} /><div><strong>No hay columnas suficientes para comparar grupos.</strong>
         <p>Se necesita al menos una columna numérica y una categórica. Este dataset tiene {numeric.length} numérica(s) y {categorical.length} categórica(s).</p></div></div>}
+    <KMeansExplorer key={`kmeans-${datasetId}`} datasetId={datasetId} numeric={numeric} />
   </div>;
 }
 

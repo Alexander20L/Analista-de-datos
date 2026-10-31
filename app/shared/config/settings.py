@@ -96,6 +96,11 @@ class EdaSettings(DomainModel):
     max_scatter_points: int = Field(ge=2)
     max_box_outliers: int = Field(ge=0)
     max_summary_groups: int = Field(ge=1)
+    kmeans_max_rows: int = Field(ge=2)
+    kmeans_max_plot_points: int = Field(ge=6)
+    kmeans_silhouette_max_rows: int = Field(ge=2)
+    kmeans_n_init: int = Field(ge=1)
+    kmeans_max_iter: int = Field(ge=1)
     random_seed: int = Field(ge=0)
 
 

@@ -10,6 +10,7 @@ import { formatNumber } from "../../lib/utils";
 import type { HeatmapChart, RankedRelationship, RelationshipRanking } from "../../types/exploration";
 import { useIntake } from "../data-intake/IntakeProvider";
 import { ColumnExplorer } from "./ColumnExplorer";
+import { LinearRegressionPanel } from "./LinearRegressionPanel";
 import { RelationshipDetail } from "./RelationshipDetail";
 import { relationshipKey, RelationshipTable } from "./RelationshipTable";
 import { explainNote } from "./notes";
@@ -100,6 +101,8 @@ export function AssociationsPage() {
     </Card>}
 
     {numeric.length > 0 && <ColumnExplorer key={datasetId} datasetId={datasetId} totalRows={result.profile.row_count} numeric={numeric} categorical={categorical} />}
+
+    <LinearRegressionPanel datasetId={datasetId} numeric={numeric} totalRows={result.profile.row_count} />
 
     {(excluded.length > 0 || (data?.skipped_pairs.length ?? 0) > 0) && <Card className="warnings-card">
       <div className="card-heading"><h2><TriangleAlert size={17} />No evaluado</h2></div>

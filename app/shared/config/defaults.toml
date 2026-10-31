@@ -68,4 +68,10 @@ max_scatter_points = 2000
 max_box_outliers = 200
 # Upper bound for grouped_summary; larger groups are shown first, the rest are reported as omitted.
 max_summary_groups = 20
+# Conservative K-Means limits for the deployed exploration endpoint.
+kmeans_max_rows = 3000
+kmeans_max_plot_points = 200
+kmeans_silhouette_max_rows = 300
+kmeans_n_init = 10
+kmeans_max_iter = 100
 random_seed = 0
