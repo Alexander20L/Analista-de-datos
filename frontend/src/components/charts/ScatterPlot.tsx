@@ -1,4 +1,4 @@
-import { useMemo, useState, type PointerEvent } from "react";
+import { useId, useMemo, useState, type PointerEvent } from "react";
 import type { ScatterChart } from "../../types/exploration";
 import { ChartFrame, useChartTooltip } from "./ChartTooltip";
 import { formatTick, formatValue, linearScale, niceDomain, niceTicks, truncate } from "./chart-utils";
@@ -8,6 +8,7 @@ const H = 380;
 const M = { top: 16, right: 24, bottom: 48, left: 64 };
 
 export function ScatterPlot({ chart, stale }: { chart: ScatterChart; stale?: boolean }) {
+  const clipId = useId();
   const { frame, hide, fromPointer, tooltip } = useChartTooltip();
   const [active, setActive] = useState<number | null>(null);
   const { sx, sy, xTicks, yTicks, xDomain } = useMemo(() => {
@@ -43,14 +44,14 @@ export function ScatterPlot({ chart, stale }: { chart: ScatterChart; stale?: boo
   return <ChartFrame frame={frame} onLeave={() => { setActive(null); hide(); }} stale={stale}
     label={`Diagrama de dispersión de ${chart.y} frente a ${chart.x}, ${chart.points.length} puntos`}>
     <svg viewBox={`0 0 ${W} ${H}`} className="chart-svg">
-      <defs><clipPath id="scatter-plot-area"><rect x={M.left} y={M.top} width={W - M.left - M.right} height={H - M.top - M.bottom} /></clipPath></defs>
+      <defs><clipPath id={clipId}><rect x={M.left} y={M.top} width={W - M.left - M.right} height={H - M.top - M.bottom} /></clipPath></defs>
       {yTicks.map((tick) => <g key={`y${tick}`}>
         <line x1={M.left} x2={W - M.right} y1={sy(tick)} y2={sy(tick)} className="gridline" />
         <text x={M.left - 8} y={sy(tick)} className="tick-label" textAnchor="end" dominantBaseline="middle">{formatTick(tick)}</text>
       </g>)}
       {xTicks.map((tick) => <text key={`x${tick}`} x={sx(tick)} y={H - M.bottom + 18} className="tick-label" textAnchor="middle">{formatTick(tick)}</text>)}
       <line x1={M.left} x2={W - M.right} y1={H - M.bottom} y2={H - M.bottom} className="baseline" />
-      <g clipPath="url(#scatter-plot-area)">
+      <g clipPath={`url(#${clipId})`}>
         {chart.points.map(([x, y], index) => <circle key={index} cx={sx(x)} cy={sy(y)} r={4} className="scatter-dot" />)}
         {fit && <line x1={fit[0][0]} y1={fit[0][1]} x2={fit[1][0]} y2={fit[1][1]} className="trend-line" />}
       </g>

@@ -38,6 +38,9 @@ from app.modules.data_intake.application.use_cases.preview_dataset import Previe
 from app.modules.data_intake.ports.data_understanding import DataUnderstanding
 from app.modules.data_intake.ports.dataset_provider import DatasetProvider, DatasetStore
 from app.modules.data_intake.ports.datasource import DataSource
+from app.modules.exploration.adapters.analytics.association.linear_regression import (
+    LinearRegressionTool,
+)
 from app.modules.exploration.adapters.analytics.association.matrix import CorrelationMatrixTool
 from app.modules.exploration.adapters.analytics.association.ranking import RelationshipRankingTool
 from app.modules.exploration.adapters.analytics.association.tools import (
@@ -106,6 +109,7 @@ EDA_TOOLS: tuple[type[DatasetTool], ...] = (
     KMeansClusteringTool,
     PearsonTool,
     SpearmanTool,
+    LinearRegressionTool,
     ChiSquareTool,
     CramersVTool,
     AnovaTool,
